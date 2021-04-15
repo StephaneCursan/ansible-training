@@ -1,0 +1,26 @@
+---
+- name: "deploy application v3"
+  become: yes
+  hosts: prod
+  tasks:
+#    - name: "Install git"
+#      yum:
+#        name: git
+#        state: present
+#        update_cache: yes
+    - name: Removing directory
+      file:
+        path: "/usr/share/nginx/html"
+        state: absent
+#    - name: "Git clone to nginx html folder"
+#      git:
+#        repo: 'https://github.com/diranetafen/static-website-example.git'
+#        clone: yes
+#        dest: /usr/share/nginx/html
+     - name: "Copy html file to centos"
+       template:
+         src=index.html.j2
+         dest: /usr/share/nginx/html
+         mode=0644
+...
+
